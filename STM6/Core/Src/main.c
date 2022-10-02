@@ -75,7 +75,6 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-  int hour=0, minute=0, second=0;
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -93,27 +92,15 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  int n=0;
   while (1)
   {
     /* USER CODE END WHILE */
-	  	     if(second==60)
-	  	  		 {
-	  	  		 minute+=1;
-	  	  		 second=0;
-	  	  		 }
-	  	  	 if(minute==60)
-	  	  	 {
-	  	  		 hour+=1;
-	  	  		 minute=0;
-	  	  	 }
-	  	  	 if(hour==12)
-	  	  	 {
-	  	  		hour=0;
-	  	  	 }
-	  	  	 clock(hour,minute,second);
-	  	  	second++;
+	  setNumberOnClock(n);
+	  n++;
+	  if(n>11) n=0;
 
-	  	  	 HAL_Delay(50);
+	  	  	 HAL_Delay(100);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -185,140 +172,11 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-void clock(int hour,int minute,int second)
-{
-	clearAllClock();
-	switch (second%12)
-				{
-		case 0:
-			setNumberOnClock(0);
-					break;
-				case 1:
-					setNumberOnClock(1);
-					break;
-				case 2:
-					setNumberOnClock(2);
-					break;
-				case 3:
-					setNumberOnClock(3);
-					break;
-				case 4:
-					setNumberOnClock(4);
-					break;
-				case 5:
-					setNumberOnClock(5);
-					break;
-				case 6:
-					setNumberOnClock(6);
-					break;
-				case 7:
-					setNumberOnClock(7);
-					break;
-				case 8:
-					setNumberOnClock(8);
-					break;
-					case 9:
-						setNumberOnClock(9);
-						break;
-					case 10:
-						setNumberOnClock(10);
-						break;
-					case 11:
-						setNumberOnClock(11);
-						break;
-					default: break;
-				}
 
-	switch (minute%12)
-					{
-			case 0:
-				setNumberOnClock(0);
-						break;
-					case 1:
-						setNumberOnClock(1);
-						break;
-					case 2:
-						setNumberOnClock(2);
-						break;
-					case 3:
-						setNumberOnClock(3);
-						break;
-					case 4:
-						setNumberOnClock(4);
-						break;
-					case 5:
-						setNumberOnClock(5);
-						break;
-					case 6:
-						setNumberOnClock(6);
-						break;
-					case 7:
-						setNumberOnClock(7);
-						break;
-					case 8:
-						setNumberOnClock(8);
-						break;
-						case 9:
-							setNumberOnClock(9);
-							break;
-						case 10:
-							setNumberOnClock(10);
-							break;
-						case 11:
-							setNumberOnClock(11);
-							break;
-						default: break;
-					}
-
-	switch (hour)
-					{
-			case 0:
-				setNumberOnClock(0);
-						break;
-					case 1:
-						setNumberOnClock(1);
-						break;
-					case 2:
-						setNumberOnClock(2);
-						break;
-					case 3:
-						setNumberOnClock(3);
-						break;
-					case 4:
-						setNumberOnClock(4);
-						break;
-					case 5:
-						setNumberOnClock(5);
-						break;
-					case 6:
-						setNumberOnClock(6);
-						break;
-					case 7:
-						setNumberOnClock(7);
-						break;
-					case 8:
-						setNumberOnClock(8);
-						break;
-						case 9:
-							setNumberOnClock(9);
-							break;
-						case 10:
-							setNumberOnClock(10);
-							break;
-						case 11:
-							setNumberOnClock(11);
-							break;
-						default: break;
-					}
-}
-
-void clearAllClock()
-{
-	HAL_GPIO_WritePin(GPIOA, a_Pin|b_Pin|c_Pin|d_Pin|e_Pin|f_Pin|g_Pin|h_Pin|i_Pin|j_Pin|k_Pin|l_Pin, GPIO_PIN_SET);
-}
 
 void setNumberOnClock(int num)
 {
+	HAL_GPIO_WritePin(GPIOA, a_Pin|b_Pin|c_Pin|d_Pin|e_Pin|f_Pin|g_Pin|h_Pin|i_Pin|j_Pin|k_Pin|l_Pin, GPIO_PIN_SET);
 	switch (num)
 		{
 		case 0:
